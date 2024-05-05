@@ -53,6 +53,8 @@ public class giaodien extends JFrame {
 	public JComboBox comboBox_Chuc_Vu;
 	public QLNVControler ac;
 	public JTextField textField_Email;
+	public JRadioButton Radio_Nam;
+	public JRadioButton Radio_Nu;
 
 	
 	public giaodien() {
@@ -177,12 +179,12 @@ public class giaodien extends JFrame {
 		Label_Gioi_Tinh.setBounds(20, 393, 98, 34);
 		contentPane.add(Label_Gioi_Tinh);
 		
-		JRadioButton Radio_Nam = new JRadioButton("Nam");
+		Radio_Nam = new JRadioButton("Nam");
 		Radio_Nam.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Radio_Nam.setBounds(115, 400, 57, 21);
 		contentPane.add(Radio_Nam);
 		
-		JRadioButton Radio_Nu = new JRadioButton("Nữ");
+		Radio_Nu = new JRadioButton("Nữ");
 		Radio_Nu.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Radio_Nu.setBounds(174, 400, 57, 21);
 		contentPane.add(Radio_Nu);
@@ -296,29 +298,88 @@ public class giaodien extends JFrame {
 		comboBox_QueQuan1.setSelectedIndex(-1);// không chọn bất kì ai hết
 		comboBox_Chuc_Vu.setSelectedIndex(-1); // không chọn bất kì ai hết
 		btn_gioitinh.clearSelection();
-		
+		textField_Email.setText("");
 	}
-
+public void themNhanVien(nhanvien nv) {
+	DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+	model_table = (DefaultTableModel) table.getModel();
+	model_table.addRow(
+			new Object[] {
+					nv.getMaNhanVien()+"",
+					nv.getHovaTen(),
+				   (nv.getGioiTinh()?"Nam":"Nữ"),
+					nv.getChucVu().getTenChucVu(),
+				    nv.getQueQuan().getTenTinh(),
+				    nv.getSoDienThoai()+"",
+				    nv.getEmail(),
+				    nv.getLuong()+""});
+}
 // thêm nhân viên vô
-	public void themNhanVien(nhanvien nv) {
-		qlnv.them(nv);
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-		model.addRow(
-				new Object[] {
-						nv.getMaNhanVien()+"",
-						nv.getHovaTen(),
-					   (nv.getGioiTinh()?"Nam":"Nữ"),
-						nv.getChucVu().getTenChucVu(),
-					    nv.getQueQuan().getTenTinh(),
-					    nv.getSoDienThoai()+"",
-					    nv.getEmail(),
-					    nv.getLuong()+""});
+	public void themofcapnhatNhanVien(nhanvien nv) {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		// kiểm tra nếu mã nhân viên tồn tại
+	if(!this.qlnv.kiemTraTonTai(nv)) {
+		this.qlnv.them(nv);
+		this.themNhanVien(nv);
+	}else {
+		this.qlnv.capnhat(nv);
+		int soLuongDong = model_table.getRowCount();
+		for(int i = 0;i <soLuongDong;i++) {
+			String id = model_table.getValueAt(i, 0)+"";
+			if(id.equals(nv.getMaNhanVien())) {
+				model_table.setValueAt(nv.getMaNhanVien()+"",i,0);
+				model_table.setValueAt(nv.getHovaTen(),i,1);
+				model_table.setValueAt((nv.getGioiTinh()?"Nam":"Nữ"),i,2);
+				model_table.setValueAt(nv.getChucVu().getTenChucVu(),i,3);
+				model_table.setValueAt(nv.getQueQuan().getTenTinh(),i,4);
+				model_table.setValueAt(nv.getSoDienThoai()+"",i,5);
+				model_table.setValueAt(nv.getEmail(),i,6);
+				model_table.setValueAt(nv.getLuong()+"",i,7);
+			}
+			
+		}
 	}
+}
 
 
-	public void capNhatNhanVien(nhanvien nv) {
-	
+
+
+
+	public void hienThiThongTinNhanVien() {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		int i_row= table.getSelectedRow();//lấy vị trí thứ tự
+		//Lấy dữ liệu
+		String manhanvien = model_table.getValueAt(i_row, 0)+" ";
+		String tennhanvien = model_table.getValueAt(i_row, 1)+"";
+		String gt = model_table.getValueAt(i_row, 2)+"";
+		boolean gioitinh = gt.equals("Nam");
+		Chucvu cv = Chucvu.getChucVuByChucVu( (String) model_table.getValueAt(i_row, 3));
+		Tinh tinh = Tinh.getTinhByTinh((String)model_table.getValueAt(i_row, 4));
+		String sodienthoai =  model_table.getValueAt(i_row, 5)+"";
+		String email =  model_table.getValueAt(i_row, 6)+"";
 		
-	}
+		
+		int luong = Integer.valueOf( model_table.getValueAt(i_row, 7)+"");
+		
+		
+		this.textField_Ma_nv.setText(manhanvien);
+		this.textField_Ho_va_ten.setText(tennhanvien);
+		if(gioitinh) {
+			Radio_Nam.setSelected(true);
+		}else {
+			Radio_Nu.setSelected(true);
+		}
+		
+		
+		
+		this.comboBox_Chuc_Vu.setSelectedItem(cv.getTenChucVu());
+		this.comboBox_QueQuan1.setSelectedItem(tinh.getTenTinh());
+		this.textField_So_Dien_Thoai.setText(sodienthoai);
+		this.textField_Email.setText(email);
+		this.textField_Luong.setText(luong+"");
+		   
+		
+
+}
 }
 

@@ -40,4 +40,15 @@ public void capnhat(nhanvien nv) {
 	this.danhsach.remove(nv);
 	this.danhsach.add(nv);
 }
+
+public boolean kiemTraTonTai(nhanvien nv) {
+    for (nhanvien nhanVien : danhsach) {
+        if (nhanVien.getMaNhanVien().equals(nv.getMaNhanVien())) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 }

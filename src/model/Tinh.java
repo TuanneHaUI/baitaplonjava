@@ -116,7 +116,7 @@ public class Tinh implements Serializable{
 							"Yên Bái"};
 		
 
-		ArrayList<Tinh> listTinh = new ArrayList<Tinh>();
+		ArrayList listTinh = new ArrayList();
 		int i = 0;
 		for (String tenTinh : arr_tinh) {
 			Tinh t = new Tinh(i, tenTinh);
@@ -125,10 +125,16 @@ public class Tinh implements Serializable{
 		return listTinh;
 	}
 
-	public static Tinh getTinhById(int quequan) {
-		// TODO Auto-generated method stub
-		return  (Tinh) Tinh.getDSTinh().get(quequan);
+	public static Tinh getTinhById(int queQuan) {
+		return (Tinh) Tinh.getDSTinh().get(queQuan-1);
+	}
+
+	public static Tinh getTinhByTinh(String tenTinh) {
+		ArrayList<Tinh> listTinh = Tinh.getDSTinh();
+		for (Tinh tinh : listTinh) {
+			if(tinh.tenTinh.equals(tenTinh))
+				return tinh;
+		}
+		return null;
 	}
 }
-
-

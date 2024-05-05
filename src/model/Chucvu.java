@@ -35,6 +35,16 @@ public static ArrayList getDSChucVu() {
 
 public static Chucvu getChucVuById(int chucvu) {
 	
-	return (Chucvu) Chucvu.getDSChucVu().get(chucvu);
+	return (Chucvu) Chucvu.getDSChucVu().get(chucvu-1);
+}
+
+public static Chucvu getChucVuByChucVu(String cvv) {
+	ArrayList<Chucvu> cv = getDSChucVu();
+	for (Chucvu chucvu : cv) {
+		if(chucvu.tenChucVu.equals(cvv)) {
+			return chucvu;
+		}
+	}
+	return null;
 }
 }

@@ -1,14 +1,14 @@
 package model;
 
 public class nhanvien {
-private int MaNhanVien;
+private String MaNhanVien;
 private String HovaTen, Email;
 private Chucvu ChucVu;
-int SoDienThoai;
+private String SoDienThoai;
 Tinh QueQuan;
 private boolean gioiTinh;
 private int Luong;
-public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai2, String email, Tinh queQuan, int MaNhanVien, int Luong) {
+public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, String sodienthoai2, String email, Tinh queQuan, String MaNhanVien, int Luong) {
 	super();
 	this.HovaTen = hovaTen;
 	this.gioiTinh = gioiTinh;
@@ -19,10 +19,10 @@ public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai
 	this.MaNhanVien = MaNhanVien;
 	this.Luong=Luong;
 }
-public int getMaNhanVien() {
+public String getMaNhanVien() {
 	return MaNhanVien;
 }
-public void setMaNhanVien(int maNhanVien) {
+public void setMaNhanVien(String maNhanVien) {
 	MaNhanVien = maNhanVien;
 }
 public void setGioiTinh(boolean gioiTinh) {
@@ -50,10 +50,10 @@ public Chucvu getChucVu() {
 public void setChucVu(Chucvu chucVu) {
 	ChucVu = chucVu;
 }
-public int getSoDienThoai() {
+public String getSoDienThoai() {
 	return SoDienThoai;
 }
-public void setSoDienThoai(int soDienThoai) {
+public void setSoDienThoai(String soDienThoai) {
 	SoDienThoai = soDienThoai;
 }
 public String getEmail() {
