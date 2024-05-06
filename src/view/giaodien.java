@@ -315,31 +315,32 @@ public void themNhanVien(nhanvien nv) {
 				    nv.getLuong()+""});
 }
 // thêm nhân viên vô
-	public void themofcapnhatNhanVien(nhanvien nv) {
-		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
-		// kiểm tra nếu mã nhân viên tồn tại
-	if(!this.qlnv.kiemTraTonTai(nv)) {
-		this.qlnv.them(nv);
-		this.themNhanVien(nv);
-	}else {
-		this.qlnv.capnhat(nv);
-		int soLuongDong = model_table.getRowCount();
-		for(int i = 0;i <soLuongDong;i++) {
-			String id = model_table.getValueAt(i, 0)+"";
-			if(id.equals(nv.getMaNhanVien())) {
-				model_table.setValueAt(nv.getMaNhanVien()+"",i,0);
-				model_table.setValueAt(nv.getHovaTen(),i,1);
-				model_table.setValueAt((nv.getGioiTinh()?"Nam":"Nữ"),i,2);
-				model_table.setValueAt(nv.getChucVu().getTenChucVu(),i,3);
-				model_table.setValueAt(nv.getQueQuan().getTenTinh(),i,4);
-				model_table.setValueAt(nv.getSoDienThoai()+"",i,5);
-				model_table.setValueAt(nv.getEmail(),i,6);
-				model_table.setValueAt(nv.getLuong()+"",i,7);
-			}
-			
-		}
-	}
+public void themofcapnhatNhanVien(nhanvien nv) {
+    DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+    // Kiểm tra nếu mã nhân viên tồn tại
+    if (!this.qlnv.kiemTraTonTai(nv)) {
+        this.qlnv.them(nv);
+        this.themNhanVien(nv); // Thêm nhân viên mới vào bảng hiển thị
+    } else if(this.qlnv.kiemTraTonTai(nv)){
+        this.qlnv.capnhat(nv);
+        // Cập nhật thông tin của nhân viên trong bảng hiển thị
+        int soLuongDong = model_table.getRowCount();
+        for (int i = 0; i < soLuongDong; i++) {
+            String id = model_table.getValueAt(i, 0) + "";
+            if (id.equals(nv.getMaNhanVien())) {
+                model_table.setValueAt(nv.getMaNhanVien() + "", i, 0);
+                model_table.setValueAt(nv.getHovaTen(), i, 1);
+                model_table.setValueAt((nv.getGioiTinh() ? "Nam" : "Nữ"), i, 2);
+                model_table.setValueAt(nv.getChucVu().getTenChucVu(), i, 3);
+                model_table.setValueAt(nv.getQueQuan().getTenTinh(), i, 4);
+                model_table.setValueAt(nv.getSoDienThoai() + "", i, 5);
+                model_table.setValueAt(nv.getEmail(), i, 6);
+                model_table.setValueAt(nv.getLuong() + "", i, 7);
+            }
+        }
+    }
 }
+
 
 
 
