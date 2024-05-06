@@ -363,7 +363,7 @@ public void themofcapnhatNhanVien(nhanvien nv) {
 		int luong = Integer.valueOf( model_table.getValueAt(i_row, 7)+"");
 		
 		
-		this.textField_Ma_nv.setText(manhanvien);
+		this.textField_Ma_nv.setText(manhanvien.trim()); // phải xóa khoảng trắng đầu cuối không sẽ gẫy ra lỗi cập nhât
 		this.textField_Ho_va_ten.setText(tennhanvien);
 		if(gioitinh) {
 			Radio_Nam.setSelected(true);
