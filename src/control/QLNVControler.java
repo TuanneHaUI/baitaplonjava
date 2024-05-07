@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 import model.Chucvu;
 import model.Tinh;
-import model.nhanvien;
-import view.giaodien;
+import model.Nhanvien;
+import view.Giaodien;
 
 public class QLNVControler implements ActionListener{
-private giaodien gd;
-	public QLNVControler(giaodien gd) {
+private Giaodien gd;
+	public QLNVControler(Giaodien gd) {
 	this.gd = gd;
 }
 	@Override
@@ -58,7 +58,7 @@ private giaodien gd;
 				if(luong == 0.0 || sodienthoai==0) {
 					// không làm gì cả
 				}else {
-					nhanvien nv = new nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
+					Nhanvien nv = new Nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
 					this.gd.themofcapnhatNhanVien(nv);
 				}
 				
@@ -68,6 +68,8 @@ private giaodien gd;
 		}else if(lay_du_lieu.equalsIgnoreCase("Cập nhật")) {
 			this.gd.hienThiThongTinNhanVien();
 			
+		}else if(lay_du_lieu.equalsIgnoreCase("xóa")) {
+			this.gd.thucHienXoa();
 		}
 		
 	}

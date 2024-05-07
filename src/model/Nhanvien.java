@@ -1,6 +1,6 @@
 package model;
 
-public class nhanvien {
+public class Nhanvien {
 private String MaNhanVien;
 private String HovaTen, Email;
 private Chucvu ChucVu;
@@ -8,7 +8,7 @@ private int SoDienThoai;
 Tinh QueQuan;
 private boolean gioiTinh;
 private float Luong;
-public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai, String email, Tinh queQuan, String MaNhanVien, float Luong) {
+public Nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai, String email, Tinh queQuan, String MaNhanVien, float Luong) {
 	super();
 	this.HovaTen = hovaTen;
 	this.gioiTinh = gioiTinh;
@@ -28,10 +28,14 @@ public void setMaNhanVien(String maNhanVien) {
 public void setGioiTinh(boolean gioiTinh) {
 	this.gioiTinh = gioiTinh;
 }
-public nhanvien() {
+public Nhanvien() {
  
 }
 
+public Nhanvien(String maNhanVien) {
+	super();
+	MaNhanVien = maNhanVien;
+}
 public String getHovaTen() {
 	return HovaTen;
 }
