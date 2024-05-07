@@ -24,14 +24,28 @@ private giaodien gd;
 //			this.gd.qlnv.setLuachon("Thêm");
 		}else if(lay_du_lieu.equalsIgnoreCase("Lưu")) {
 			try {
-				//Lấy dữ liệu
+				//Lấy dữ liệu và quăng vô setter
 				String manhanvien = this.gd.textField_Ma_nv.getText();
 				String tennhanvien = this.gd.textField_Ho_va_ten.getText();
 				String email = this.gd.textField_Email.getText();
 				int quequan = this.gd.comboBox_QueQuan1.getSelectedIndex();
 				Tinh tinh = Tinh.getTinhById(quequan);
-				String sodienthoai = this.gd.textField_So_Dien_Thoai.getText();
-				int luong = Integer.valueOf(this.gd.textField_Luong.getText());
+				// bắt lỗi định dạng số điện thoại
+				int sodienthoai = 0;
+				try {
+					sodienthoai = Integer.valueOf( this.gd.textField_So_Dien_Thoai.getText());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(gd,"Lỗi định dạng số điện thoại");
+					e1.printStackTrace();
+				}
+				// bắt lỗi định dạng lương
+				float luong = 0;
+				try {
+					luong = Float.valueOf(this.gd.textField_Luong.getText());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(gd,"Lỗi định dạng lương");
+					e1.printStackTrace();
+				}
 				int chucvu = this.gd.comboBox_Chuc_Vu.getSelectedIndex();
 				Chucvu cv = Chucvu.getChucVuById(chucvu);
 				boolean gioitinh = true;
@@ -40,9 +54,14 @@ private giaodien gd;
 				}else if(this.gd.Radio_Nu.isSelected()) {
 					gioitinh = false;
 				}
+				// bắt lỗi định dạng nếu 1 trong hai mà lỗi thì không cho in vô table
+				if(luong == 0.0 || sodienthoai==0) {
+					// không làm gì cả
+				}else {
+					nhanvien nv = new nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
+					this.gd.themofcapnhatNhanVien(nv);
+				}
 				
-				nhanvien nv = new nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
-				this.gd.themofcapnhatNhanVien(nv);
 			} catch (Exception e1) {
 				 e1.printStackTrace();
 			}

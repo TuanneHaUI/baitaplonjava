@@ -81,7 +81,7 @@ public class giaodien extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Close");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Exit");
@@ -314,7 +314,7 @@ public void themNhanVien(nhanvien nv) {
 				    nv.getEmail(),
 				    nv.getLuong()+""});
 }
-// thêm nhân viên vô
+// thêm nhân viên vô nếu chưa tồn tại
 public void themofcapnhatNhanVien(nhanvien nv) {
     DefaultTableModel model_table = (DefaultTableModel) table.getModel();
     // Kiểm tra nếu mã nhân viên tồn tại
@@ -349,20 +349,20 @@ public void themofcapnhatNhanVien(nhanvien nv) {
 	public void hienThiThongTinNhanVien() {
 		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
 		int i_row= table.getSelectedRow();//lấy vị trí thứ tự
-		//Lấy dữ liệu
+		//Lấy dữ liệu theo từng cột
 		String manhanvien = model_table.getValueAt(i_row, 0)+" ";
 		String tennhanvien = model_table.getValueAt(i_row, 1)+"";
 		String gt = model_table.getValueAt(i_row, 2)+"";
 		boolean gioitinh = gt.equals("Nam");
 		Chucvu cv = Chucvu.getChucVuByChucVu( (String) model_table.getValueAt(i_row, 3));
 		Tinh tinh = Tinh.getTinhByTinh((String)model_table.getValueAt(i_row, 4));
-		String sodienthoai =  model_table.getValueAt(i_row, 5)+"";
+		Object sodienthoai =  model_table.getValueAt(i_row, 5);
 		String email =  model_table.getValueAt(i_row, 6)+"";
 		
 		
-		int luong = Integer.valueOf( model_table.getValueAt(i_row, 7)+"");
+		float luong = Float.valueOf( model_table.getValueAt(i_row, 7)+"");
 		
-		
+		// lấy dữ liệu ra để chỉnh sửa phần dưới
 		this.textField_Ma_nv.setText(manhanvien.trim()); // phải xóa khoảng trắng đầu cuối không sẽ gẫy ra lỗi cập nhât
 		this.textField_Ho_va_ten.setText(tennhanvien);
 		if(gioitinh) {
@@ -372,10 +372,9 @@ public void themofcapnhatNhanVien(nhanvien nv) {
 		}
 		
 		
-		
 		this.comboBox_Chuc_Vu.setSelectedItem(cv.getTenChucVu());
 		this.comboBox_QueQuan1.setSelectedItem(tinh.getTenTinh());
-		this.textField_So_Dien_Thoai.setText(sodienthoai);
+		this.textField_So_Dien_Thoai.setText(sodienthoai+"");
 		this.textField_Email.setText(email);
 		this.textField_Luong.setText(luong+"");
 		   
