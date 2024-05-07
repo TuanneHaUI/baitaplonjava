@@ -4,16 +4,16 @@ public class nhanvien {
 private String MaNhanVien;
 private String HovaTen, Email;
 private Chucvu ChucVu;
-private String SoDienThoai;
+private int SoDienThoai;
 Tinh QueQuan;
 private boolean gioiTinh;
-private int Luong;
-public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, String sodienthoai2, String email, Tinh queQuan, String MaNhanVien, int Luong) {
+private float Luong;
+public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai, String email, Tinh queQuan, String MaNhanVien, float Luong) {
 	super();
 	this.HovaTen = hovaTen;
 	this.gioiTinh = gioiTinh;
 	this.ChucVu = ChucVu;
-	this.SoDienThoai = sodienthoai2;
+	this.SoDienThoai = sodienthoai;
 	this.Email = email;
 	this.QueQuan = queQuan;
 	this.MaNhanVien = MaNhanVien;
@@ -50,10 +50,10 @@ public Chucvu getChucVu() {
 public void setChucVu(Chucvu chucVu) {
 	ChucVu = chucVu;
 }
-public String getSoDienThoai() {
+public int getSoDienThoai() {
 	return SoDienThoai;
 }
-public void setSoDienThoai(String soDienThoai) {
+public void setSoDienThoai(int soDienThoai) {
 	SoDienThoai = soDienThoai;
 }
 public String getEmail() {
@@ -68,10 +68,10 @@ public Tinh getQueQuan() {
 public void setQueQuan(Tinh queQuan) {
 	QueQuan = queQuan;
 }
-public int getLuong() {
+public float getLuong() {
 	return Luong;
 }
-public void setLuong(int luong) {
+public void setLuong(float luong) {
 	Luong = luong;
 }
 
