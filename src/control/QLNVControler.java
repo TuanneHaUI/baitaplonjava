@@ -20,9 +20,6 @@ private Giaodien gd;
 		String lay_du_lieu = e.getActionCommand();
 //		JOptionPane.showMessageDialog(gd,"Bạn vừa ấn vô nút "+ lay_du_lieu);
 		if(lay_du_lieu.equalsIgnoreCase("Thêm")) {
-			this.gd.xoaForm();
-//			this.gd.qlnv.setLuachon("Thêm");
-		}else if(lay_du_lieu.equalsIgnoreCase("Lưu")) {
 			try {
 				//Lấy dữ liệu và quăng vô setter
 				String manhanvien = this.gd.textField_Ma_nv.getText();
@@ -65,11 +62,21 @@ private Giaodien gd;
 			} catch (Exception e1) {
 				 e1.printStackTrace();
 			}
+			this.gd.xoaForm();
+//			this.gd.qlnv.setLuachon("Thêm");
+		}else if(lay_du_lieu.equalsIgnoreCase("Lưu")) {
+		
 		}else if(lay_du_lieu.equalsIgnoreCase("Cập nhật")) {
 			this.gd.hienThiThongTinNhanVien();
 			
 		}else if(lay_du_lieu.equalsIgnoreCase("xóa")) {
 			this.gd.thucHienXoa();
+		}else if(lay_du_lieu.equalsIgnoreCase("tìm")) {
+			this.gd.thucHienTim();
+		}else if(lay_du_lieu.equalsIgnoreCase("hủy tìm")) {
+			this.gd.thucHienHuyTim();
+		}else if(lay_du_lieu.equalsIgnoreCase("exit")) {
+			System.exit(0);
 		}
 		
 	}

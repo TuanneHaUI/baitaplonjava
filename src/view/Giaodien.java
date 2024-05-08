@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -42,7 +45,7 @@ public class Giaodien extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textField_maNhanVienTimKiem;
 	private JTable table;
 	public JTextField textField_Ma_nv;
 	public JTextField textField_Ho_va_ten;
@@ -56,6 +59,8 @@ public class Giaodien extends JFrame {
 	public JTextField textField_Email;
 	public JRadioButton Radio_Nam;
 	public JRadioButton Radio_Nu;
+	private JButton Button_huyTim;
+	private JButton Button_Tim;
 
 	public Giaodien() {
 		this.qlnv = new QLNV();
@@ -81,10 +86,11 @@ public class Giaodien extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
 		mnNewMenu.add(mntmNewMenuItem);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
-		mnNewMenu.add(mntmNewMenuItem_1);
+//		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
+//		mnNewMenu.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Exit");
+		mntmNewMenuItem_2.addActionListener(ac);
 		mnNewMenu.add(mntmNewMenuItem_2);
 
 		JMenu mnNewMenu_1 = new JMenu("About");
@@ -100,18 +106,24 @@ public class Giaodien extends JFrame {
 
 		JLabel Label_Ma_Nhan_vien = new JLabel("Mã nhân viên");
 		Label_Ma_Nhan_vien.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		Label_Ma_Nhan_vien.setBounds(352, 34, 98, 34);
+		Label_Ma_Nhan_vien.setBounds(293, 34, 98, 34);
 		contentPane.add(Label_Ma_Nhan_vien);
 
-		textField_6 = new JTextField();
-		textField_6.setBounds(460, 34, 126, 39);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
+		textField_maNhanVienTimKiem = new JTextField();
+		textField_maNhanVienTimKiem.setBounds(401, 34, 126, 39);
+		contentPane.add(textField_maNhanVienTimKiem);
+		textField_maNhanVienTimKiem.setColumns(10);
 
-		JButton Button_Tim = new JButton("Tìm");
+		Button_Tim = new JButton("Tìm");
 		Button_Tim.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		Button_Tim.setBounds(609, 32, 97, 39);
+		Button_Tim.setBounds(537, 34, 97, 39);
 		contentPane.add(Button_Tim);
+
+		Button_huyTim = new JButton("Hủy tìm");
+		Button_huyTim.addActionListener(ac);
+		Button_huyTim.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Button_huyTim.setBounds(637, 34, 97, 39);
+		contentPane.add(Button_huyTim);
 
 		// Tạo mảng để lữu trữ quê
 		comboBox_QueQuan = new JComboBox();
@@ -206,10 +218,10 @@ public class Giaodien extends JFrame {
 		textField_So_Dien_Thoai.setBounds(460, 370, 96, 19);
 		contentPane.add(textField_So_Dien_Thoai);
 
-		JLabel Label_So_gio_Lam_1 = new JLabel("Quê quán");
-		Label_So_gio_Lam_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		Label_So_gio_Lam_1.setBounds(352, 393, 98, 34);
-		contentPane.add(Label_So_gio_Lam_1);
+		JLabel Label_queQuan = new JLabel("Quê quán");
+		Label_queQuan.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Label_queQuan.setBounds(352, 393, 98, 34);
+		contentPane.add(Label_queQuan);
 
 		// Tạo mảng quê quán
 		comboBox_QueQuan1 = new JComboBox();
@@ -328,7 +340,7 @@ public class Giaodien extends JFrame {
 	}
 
 	public void hienThiThongTinNhanVien() {
-		//lấy dữ liệu phần trên
+		// lấy dữ liệu phần trên
 		Nhanvien nv = getNhanVienDangDuocChon();
 		// lấy dữ liệu ra để chỉnh sửa phần dưới
 		this.textField_Ma_nv.setText(nv.getMaNhanVien()); // phải xóa khoảng trắng đầu cuối không sẽ gẫy ra lỗi cập nhât
@@ -351,7 +363,7 @@ public class Giaodien extends JFrame {
 		boolean gioitinh = gt.equals("Nam");
 		Chucvu cv = Chucvu.getChucVuByChucVu((String) model_table.getValueAt(i_row, 3));
 		Tinh tinh = Tinh.getTinhByTinh((String) model_table.getValueAt(i_row, 4));
-		int sodienthoai = Integer.valueOf(model_table.getValueAt(i_row, 5)+"");
+		int sodienthoai = Integer.valueOf(model_table.getValueAt(i_row, 5) + "");
 		String email = model_table.getValueAt(i_row, 6) + "";
 
 		float luong = Float.valueOf(model_table.getValueAt(i_row, 7) + "");
@@ -361,25 +373,84 @@ public class Giaodien extends JFrame {
 		} else {
 			Radio_Nu.setSelected(true);
 		}
-		Nhanvien nv = new Nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
+		Nhanvien nv = new Nhanvien(tennhanvien, gioitinh, cv, sodienthoai, email, tinh, manhanvien, luong);
 		return nv;
 	}
 
 	public void thucHienXoa() {
-	    DefaultTableModel model_table = (DefaultTableModel) table.getModel();
-	    int i_row = table.getSelectedRow();// lấy vị trí thứ tự xem người ta đang chọn dòng nào
-	    int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa dòng đã chọn.");// hiển thị thông báo
-	    // nếu người ta chọn nút yes thì bắt đầu xóa
-	    if (luaChon == JOptionPane.YES_OPTION) {
-	        Nhanvien nv = getNhanVienDangDuocChon();
-	        this.qlnv.xoa(nv); // Xóa khỏi dữ liệu thực
-	        model_table.removeRow(i_row); // Xóa khỏi bảng
-	       
-	    }
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		int i_row = table.getSelectedRow();// lấy vị trí thứ tự xem người ta đang chọn dòng nào
+		int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa dòng đã chọn.");// hiển thị thông báo
+		// nếu người ta chọn nút yes thì bắt đầu xóa
+		if (luaChon == JOptionPane.YES_OPTION) {
+			// phải có hàm so sánh equal ở nhân viên và chức vụ mới xóa được
+			Nhanvien nv = getNhanVienDangDuocChon();
+			this.qlnv.xoa(nv); // Xóa khỏi dữ liệu thực
+			model_table.removeRow(i_row); // Xóa khỏi bảng
+
+		}
 	}
 
-
+	public void thucHienTim() {
+		thucHienHuyTim();
+		int queQuan = this.comboBox_QueQuan.getSelectedIndex();// số quê quán ngta đã chọn
+		Tinh tinh = Tinh.getTinhById(queQuan);
+		String maNhanVienTimKiem = this.textField_maNhanVienTimKiem.getText(); // lấy ra mã nhân viên
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		int tongSoDongTrongTable = table.getRowCount(); // Lấy số lượng tất cả các dòng
+		Set<String> idNhanVienCanXoa = new TreeSet<String>();
+		if (queQuan >= 0) {
+			Tinh tinhDaChon = Tinh.getTinhById(queQuan);
+			for (int i = 0; i < tongSoDongTrongTable; i++) {
+				String tenTinh = model_table.getValueAt(i, 2) + ""; // lấy giá trị tên tỉnh
+				String id = model_table.getValueAt(i, 0) + "";// lấy ra mã nhân viên
+				if (!tenTinh.equals(tinhDaChon.getTenTinh())) {
+					idNhanVienCanXoa.add(id);
+				}
+			}
+		}if(maNhanVienTimKiem.length()>0) {
+			for (int i = 0; i < tongSoDongTrongTable; i++) {
+				String id = model_table.getValueAt(i, 0) + "";
+				if (!id.equals(maNhanVienTimKiem)) {
+					idNhanVienCanXoa.add(id);
+				}
+			}
+		}
+		for (String idCanXoa : idNhanVienCanXoa) {
+			System.out.println(idCanXoa);
+			tongSoDongTrongTable = model_table.getRowCount();
+			for (int i = 0; i < tongSoDongTrongTable; i++) {
+				String idTrongTable = model_table.getValueAt(i, 0) + "";
+				System.out.println("idTrongTable: " + idTrongTable);
+				if (idTrongTable.equals(idCanXoa.toString())) {
+					System.out.println("Đã xóa: " + i);
+					try {
+						model_table.removeRow(i);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
 	}
 
-	
+	public void thucHienHuyTim() {
+		while (true) {
+			DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+			int soLuongDong = model_table.getRowCount();
+			if(soLuongDong==0)
+				break;
+			else
+				try {
+					model_table.removeRow(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+		for (Nhanvien nv : this.qlnv.getDanhsach()) {
+			this.themNhanVien(nv);
+		}
 
+	}
+}
