@@ -1,6 +1,27 @@
 package model;
 
-public class nhanvien {
+import java.util.Objects;
+
+public class Nhanvien {
+@Override
+	public int hashCode() {
+		return Objects.hash(ChucVu, Email, HovaTen, Luong, MaNhanVien, QueQuan, SoDienThoai, gioiTinh);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Nhanvien other = (Nhanvien) obj;
+		return Objects.equals(ChucVu, other.ChucVu) && Objects.equals(Email, other.Email)
+				&& Objects.equals(HovaTen, other.HovaTen)
+				&& Float.floatToIntBits(Luong) == Float.floatToIntBits(other.Luong)
+				&& Objects.equals(MaNhanVien, other.MaNhanVien) && Objects.equals(QueQuan, other.QueQuan)
+				&& SoDienThoai == other.SoDienThoai && gioiTinh == other.gioiTinh;
+	}
 private String MaNhanVien;
 private String HovaTen, Email;
 private Chucvu ChucVu;
@@ -8,7 +29,7 @@ private int SoDienThoai;
 Tinh QueQuan;
 private boolean gioiTinh;
 private float Luong;
-public nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai, String email, Tinh queQuan, String MaNhanVien, float Luong) {
+public Nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai, String email, Tinh queQuan, String MaNhanVien, float Luong) {
 	super();
 	this.HovaTen = hovaTen;
 	this.gioiTinh = gioiTinh;
@@ -28,10 +49,14 @@ public void setMaNhanVien(String maNhanVien) {
 public void setGioiTinh(boolean gioiTinh) {
 	this.gioiTinh = gioiTinh;
 }
-public nhanvien() {
+public Nhanvien() {
  
 }
 
+public Nhanvien(String maNhanVien) {
+	super();
+	MaNhanVien = maNhanVien;
+}
 public String getHovaTen() {
 	return HovaTen;
 }

@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 import model.Chucvu;
 import model.Tinh;
-import model.nhanvien;
-import view.giaodien;
+import model.Nhanvien;
+import view.Giaodien;
 
 public class QLNVControler implements ActionListener{
-private giaodien gd;
-	public QLNVControler(giaodien gd) {
+private Giaodien gd;
+	public QLNVControler(Giaodien gd) {
 	this.gd = gd;
 }
 	@Override
@@ -20,9 +20,6 @@ private giaodien gd;
 		String lay_du_lieu = e.getActionCommand();
 //		JOptionPane.showMessageDialog(gd,"Bạn vừa ấn vô nút "+ lay_du_lieu);
 		if(lay_du_lieu.equalsIgnoreCase("Thêm")) {
-			this.gd.xoaForm();
-//			this.gd.qlnv.setLuachon("Thêm");
-		}else if(lay_du_lieu.equalsIgnoreCase("Lưu")) {
 			try {
 				//Lấy dữ liệu và quăng vô setter
 				String manhanvien = this.gd.textField_Ma_nv.getText();
@@ -58,16 +55,28 @@ private giaodien gd;
 				if(luong == 0.0 || sodienthoai==0) {
 					// không làm gì cả
 				}else {
-					nhanvien nv = new nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
+					Nhanvien nv = new Nhanvien(tennhanvien,gioitinh,cv,sodienthoai,email,tinh,manhanvien,luong);
 					this.gd.themofcapnhatNhanVien(nv);
 				}
 				
 			} catch (Exception e1) {
 				 e1.printStackTrace();
 			}
+			this.gd.xoaForm();
+//			this.gd.qlnv.setLuachon("Thêm");
+		}else if(lay_du_lieu.equalsIgnoreCase("Lưu")) {
+		
 		}else if(lay_du_lieu.equalsIgnoreCase("Cập nhật")) {
 			this.gd.hienThiThongTinNhanVien();
 			
+		}else if(lay_du_lieu.equalsIgnoreCase("xóa")) {
+			this.gd.thucHienXoa();
+		}else if(lay_du_lieu.equalsIgnoreCase("tìm")) {
+			this.gd.thucHienTim();
+		}else if(lay_du_lieu.equalsIgnoreCase("hủy tìm")) {
+			this.gd.thucHienHuyTim();
+		}else if(lay_du_lieu.equalsIgnoreCase("exit")) {
+			System.exit(0);
 		}
 		
 	}
