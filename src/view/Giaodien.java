@@ -115,6 +115,7 @@ public class Giaodien extends JFrame {
 		textField_maNhanVienTimKiem.setColumns(10);
 
 		Button_Tim = new JButton("Tìm");
+		Button_Tim.addActionListener(ac);
 		Button_Tim.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Button_Tim.setBounds(537, 34, 97, 39);
 		contentPane.add(Button_Tim);
@@ -393,30 +394,35 @@ public class Giaodien extends JFrame {
 
 	public void thucHienTim() {
 		thucHienHuyTim();
-		int queQuan = this.comboBox_QueQuan.getSelectedIndex();// số quê quán ngta đã chọn
+		int queQuan = this.comboBox_QueQuan.getSelectedIndex()-1;// số quê quán ngta đã chọn
+		System.out.println("int que quan"+queQuan);
 		Tinh tinh = Tinh.getTinhById(queQuan);
 		String maNhanVienTimKiem = this.textField_maNhanVienTimKiem.getText(); // lấy ra mã nhân viên
+		System.out.println("Ma nhân viên tìm kiếm là"+maNhanVienTimKiem);
 		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
 		int tongSoDongTrongTable = table.getRowCount(); // Lấy số lượng tất cả các dòng
-		Set<String> idNhanVienCanXoa = new TreeSet<String>();
+		Set<Integer> idNhanVienCanXoa = new TreeSet<Integer>();
 		if (queQuan >= 0) {
-			Tinh tinhDaChon = Tinh.getTinhById(queQuan);
+			Tinh tinhDaChon = Tinh.getTinhById(queQuan);// trả về vị trí tỉnh , và cả tên
+			System.out.println("tên tỉnh"+tinhDaChon);
 			for (int i = 0; i < tongSoDongTrongTable; i++) {
-				String tenTinh = model_table.getValueAt(i, 2) + ""; // lấy giá trị tên tỉnh
+				String tenTinh = model_table.getValueAt(i, 4) + ""; // lấy giá trị tên tỉnh
 				String id = model_table.getValueAt(i, 0) + "";// lấy ra mã nhân viên
-				if (!tenTinh.equals(tinhDaChon.getTenTinh())) {
-					idNhanVienCanXoa.add(id);
+				if (!tenTinh.equals(tinhDaChon.getTenTinh())) { // phải có getTentinh để lấy ra so sánh
+					idNhanVienCanXoa.add(Integer.valueOf(id));
 				}
 			}
-		}if(maNhanVienTimKiem.length()>0) {
+		}else if(maNhanVienTimKiem.length()>0) {
 			for (int i = 0; i < tongSoDongTrongTable; i++) {
 				String id = model_table.getValueAt(i, 0) + "";
-				if (!id.equals(maNhanVienTimKiem)) {
-					idNhanVienCanXoa.add(id);
+				System.out.println("id của nhan vien tim kiem la"+id);
+				if (id.equals(maNhanVienTimKiem)) {
+					idNhanVienCanXoa.add(Integer.valueOf(id));
+					System.out.println("id của nhan vien tim kiem sau khi so sánh la"+id);
 				}
 			}
 		}
-		for (String idCanXoa : idNhanVienCanXoa) {
+		for (Integer idCanXoa : idNhanVienCanXoa) {
 			System.out.println(idCanXoa);
 			tongSoDongTrongTable = model_table.getRowCount();
 			for (int i = 0; i < tongSoDongTrongTable; i++) {
@@ -434,6 +440,8 @@ public class Giaodien extends JFrame {
 			}
 		}
 	}
+
+
 
 	public void thucHienHuyTim() {
 		while (true) {

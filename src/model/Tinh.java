@@ -126,7 +126,7 @@ public class Tinh implements Serializable{
 	}
 
 	public static Tinh getTinhById(int queQuan) {
-		return (Tinh) Tinh.getDSTinh().get(queQuan-1);
+		return (Tinh) Tinh.getDSTinh().get(queQuan);
 	}
 
 	public static Tinh getTinhByTinh(String tenTinh) {

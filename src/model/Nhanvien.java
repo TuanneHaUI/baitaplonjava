@@ -40,6 +40,12 @@ public Nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai
 	this.MaNhanVien = MaNhanVien;
 	this.Luong=Luong;
 }
+@Override
+public String toString() {
+	return "Nhanvien [MaNhanVien=" + MaNhanVien + ", HovaTen=" + HovaTen + ", Email=" + Email + ", ChucVu=" + ChucVu
+			+ ", SoDienThoai=" + SoDienThoai + ", QueQuan=" + QueQuan + ", gioiTinh=" + gioiTinh + ", Luong=" + Luong
+			+ "]";
+}
 public String getMaNhanVien() {
 	return MaNhanVien;
 }

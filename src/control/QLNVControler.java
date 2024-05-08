@@ -25,7 +25,7 @@ private Giaodien gd;
 				String manhanvien = this.gd.textField_Ma_nv.getText();
 				String tennhanvien = this.gd.textField_Ho_va_ten.getText();
 				String email = this.gd.textField_Email.getText();
-				int quequan = this.gd.comboBox_QueQuan1.getSelectedIndex();
+				int quequan = this.gd.comboBox_QueQuan1.getSelectedIndex()-1;
 				Tinh tinh = Tinh.getTinhById(quequan);
 				// bắt lỗi định dạng số điện thoại
 				int sodienthoai = 0;
@@ -71,7 +71,7 @@ private Giaodien gd;
 			
 		}else if(lay_du_lieu.equalsIgnoreCase("xóa")) {
 			this.gd.thucHienXoa();
-		}else if(lay_du_lieu.equalsIgnoreCase("tìm")) {
+		}else if(lay_du_lieu.equalsIgnoreCase("Tìm")) {
 			this.gd.thucHienTim();
 		}else if(lay_du_lieu.equalsIgnoreCase("hủy tìm")) {
 			this.gd.thucHienHuyTim();
