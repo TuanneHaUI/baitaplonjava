@@ -145,7 +145,7 @@ public class Login extends JFrame {
 	    if (tenTaiKhoan.equals("") || matKhau.equals("")) {
 	        JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
 	                JOptionPane.INFORMATION_MESSAGE);
-	    } else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
+	    } else if (tenTaiKhoan.equals("Lophocjava") && matKhau.equals("Lophocjava")) {
 	        JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
 	                JOptionPane.INFORMATION_MESSAGE);
 	        dispose(); // Đóng cửa sổ đăng nhập
