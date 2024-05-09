@@ -346,6 +346,7 @@ public class Giaodien extends JFrame {
 			this.themNhanVien(nv); // Thêm nhân viên mới vào bảng hiển thị
 		} else if (this.qlnv.kiemTraTonTai(nv)) {
 			this.qlnv.capnhat(nv);
+		
 			// Cập nhật thông tin của nhân viên trong bảng hiển thị
 			int soLuongDong = model_table.getRowCount();
 			for (int i = 0; i < soLuongDong; i++) {
@@ -419,7 +420,7 @@ public class Giaodien extends JFrame {
 	public void thucHienTim() {
 		thucHienHuyTim();
 		int queQuan = this.comboBox_QueQuan.getSelectedIndex() - 1;// số quê quán ngta đã chọn
-		String maNhanVienTimKiem = this.textField_maNhanVienTimKiem.getText(); // lấy ra mã nhân viên
+		String maNhanVienTimKiem = this.textField_maNhanVienTimKiem.getText().trim(); // lấy ra mã nhân viên
 		System.out.println("Ma nhân viên tìm kiếm là" + maNhanVienTimKiem);
 		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
 		int tongSoDongTrongTable = table.getRowCount(); // Lấy số lượng tất cả các dòng
@@ -436,9 +437,11 @@ public class Giaodien extends JFrame {
 			}
 		}
 		if (maNhanVienTimKiem.length() > 0) {
+			System.out.println("Ma nhân viên tìm kiếm là phía dưới" + maNhanVienTimKiem);
 			for (int i = 0; i < tongSoDongTrongTable; i++) {
-				String id = model_table.getValueAt(i, 0) + "";
-				if (!id.equals(maNhanVienTimKiem)) {
+				String id = model_table.getValueAt(i, 0) + "".trim();
+				if (!id.equals(maNhanVienTimKiem.trim())) {
+					System.out.println("Ma nhân viên phía khác là " + id);
 					idNhanVienCanXoa.add(Integer.valueOf(id));
 				}
 			}

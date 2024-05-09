@@ -3,13 +3,14 @@ package test;
 import java.awt.EventQueue;
 
 import view.Giaodien;
+import view.Login;
 
 public class Test {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Giaodien frame = new Giaodien();
+					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
