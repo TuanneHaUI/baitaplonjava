@@ -105,10 +105,13 @@ public class Login extends JFrame {
 	public void thucHienDangNhap() {
 		String tenTaiKhoan = textField_TaiKhoan.getText();
 		String matKhau = passwordField_MatKhau.getText();
+		
 		if (tenTaiKhoan.equals("") || matKhau.equals("")) {
-			JOptionPane.showMessageDialog(frame, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
+			JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
 					JOptionPane.INFORMATION_MESSAGE);
 		} else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
+			JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
+					JOptionPane.INFORMATION_MESSAGE);
 			dispose(); // đóng của sổ login
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -121,7 +124,7 @@ public class Login extends JFrame {
 				}
 			});
 		} else {
-			JOptionPane.showMessageDialog(frame, "Nhập sai tài khoản hay mật khẩu", "Title Example",
+			JOptionPane.showMessageDialog(this, "Nhập sai tài khoản hay mật khẩu", "Title Example",
 					JOptionPane.INFORMATION_MESSAGE);
 			textField_TaiKhoan.setText("");
 			passwordField_MatKhau.setText("");
