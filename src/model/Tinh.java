@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Tinh implements Serializable{
+public class Tinh implements Serializable {
 	private int maTinh;
 	private String tenTinh;
-	
+
 	public Tinh(int maTinh, String tenTinh) {
 		this.maTinh = maTinh;
 		this.tenTinh = tenTinh;
@@ -50,71 +50,17 @@ public class Tinh implements Serializable{
 		Tinh other = (Tinh) obj;
 		return maTinh == other.maTinh && Objects.equals(tenTinh, other.tenTinh);
 	}
-	public static ArrayList getDSTinh(){
-		String[] arr_tinh = {"An Giang",
-							"Bà Rịa – Vũng Tàu",
-							"Bạc Liêu",
-							"Bắc Giang",
-							"Bắc Kạn",
-							"Bắc Ninh",
-							"Bến Tre",
-							"Bình Dương",
-							"Bình Định",
-							"Bình Phước",
-							"Bình Thuận",
-							"Cà Mau",
-							"Cao Bằng",
-							"Cần Thơ",
-							"Đà Nẵng",
-							"Đắk Lắk",
-							"Đắk Nông",
-							"Điện Biên",
-							"Đồng Nai",
-							"Đồng Tháp",
-							"Gia Lai",
-							"Hà Giang",
-							"Hà Nam",
-							"Hà Nội",
-							"Hà Tĩnh",
-							"Hải Dương",
-							"Hải Phòng",
-							"Hậu Giang",
-							"Hòa Bình",
-							"Thành phố Hồ Chí Minh",
-							"Hưng Yên",
-							"Khánh Hòa",
-							"Kiên Giang",
-							"Kon Tum",
-							"Lai Châu",
-							"Lạng Sơn",
-							"Lào Cai",
-							"Lâm Đồng",
-							"Long An",
-							"Nam Định",
-							"Nghệ An",
-							"Ninh Bình",
-							"Ninh Thuận",
-							"Phú Thọ",
-							"Phú Yên",
-							"Quảng Bình",
-							"Quảng Nam",
-							"Quảng Ngãi",
-							"Quảng Ninh",
-							"Quảng Trị",
-							"Sóc Trăng",
-							"Sơn La",
-							"Tây Ninh",
-							"Thái Bình",
-							"Thái Nguyên",
-							"Thanh Hóa",
-							"Thừa Thiên Huế",
-							"Tiền Giang",
-							"Trà Vinh",
-							"Tuyên Quang",
-							"Vĩnh Long",
-							"Vĩnh Phúc",
-							"Yên Bái"};
-		
+
+	public static ArrayList getDSTinh() {
+		String[] arr_tinh = { "An Giang", "Bà Rịa – Vũng Tàu", "Bạc Liêu", "Bắc Giang", "Bắc Kạn", "Bắc Ninh",
+				"Bến Tre", "Bình Dương", "Bình Định", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Cần Thơ",
+				"Đà Nẵng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam",
+				"Hà Nội", "Hà Tĩnh", "Hải Dương", "Hải Phòng", "Hậu Giang", "Hòa Bình", "Thành phố Hồ Chí Minh",
+				"Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lạng Sơn", "Lào Cai", "Lâm Đồng",
+				"Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên", "Quảng Bình",
+				"Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình",
+				"Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long",
+				"Vĩnh Phúc", "Yên Bái" };
 
 		ArrayList listTinh = new ArrayList();
 		int i = 0;
@@ -132,7 +78,7 @@ public class Tinh implements Serializable{
 	public static Tinh getTinhByTinh(String tenTinh) {
 		ArrayList<Tinh> listTinh = Tinh.getDSTinh();
 		for (Tinh tinh : listTinh) {
-			if(tinh.tenTinh.equals(tenTinh))
+			if (tinh.tenTinh.equals(tenTinh))
 				return tinh;
 		}
 		return null;

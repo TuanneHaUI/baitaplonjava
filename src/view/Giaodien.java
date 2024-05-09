@@ -288,7 +288,7 @@ public class Giaodien extends JFrame {
 		Button_Lưu.setBounds(384, 471, 97, 39);
 		contentPane.add(Button_Lưu);
 
-		JButton Button_Sap_xep = new JButton("Sắp xếp ");
+		JButton Button_Sap_xep = new JButton("Sắp xếp");
 		Button_Sap_xep.addActionListener(ac);
 		Button_Sap_xep.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Button_Sap_xep.setBounds(515, 471, 97, 39);
@@ -303,7 +303,7 @@ public class Giaodien extends JFrame {
 		textField_Email.setColumns(10);
 		textField_Email.setBounds(460, 437, 96, 19);
 		contentPane.add(textField_Email);
-		
+
 //	    comboBox_Sap_Xep = new JComboBox();
 //		comboBox_Sap_Xep.setModel(new DefaultComboBoxModel(new String[] {"","Tăng dần", "Giảm dần"}));
 //		comboBox_Sap_Xep.addActionListener(ac);
@@ -311,8 +311,6 @@ public class Giaodien extends JFrame {
 //		contentPane.add(comboBox_Sap_Xep);
 
 	}
-
-
 
 	public void xoaForm() {
 		textField_Ho_va_ten.setText("");
@@ -480,101 +478,91 @@ public class Giaodien extends JFrame {
 		}
 
 	}
-public void xoaHetDuLieuTrongBang() {
-	qlnv.sapxepGiam();
-	 DefaultTableModel model_table = (DefaultTableModel) table.getModel();
-	    model_table.setRowCount(0); // Xóa dữ liệu cũ
-	    for (Nhanvien nv : this.qlnv.getDanhsach()) {
+
+	
+
+	public void hienThiAbout() {
+		JOptionPane.showConfirmDialog(this, "Phần mềm quản lí nhân viên.");
+
+	}
+
+	public void thoatKhoiChuongTrinh() {
+		int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thoát khỏi chương trình không?",
+				"Exit", JOptionPane.YES_NO_OPTION);
+		if (luaChon == JOptionPane.YES_NO_OPTION) {
+			System.exit(0);
+		}
+
+	}
+
+	public void thucHienSaveFile() {
+		if (this.qlnv.getTenFile().length() > 0) {
+			saveFile(this.qlnv.getTenFile());
+			System.out.println("đã đi vào đây tenFile");
+		} else {
+			System.out.println("đã đi vào đây tenFile duoi");
+			JFileChooser fc = new JFileChooser();
+			int retrurnVal = fc.showSaveDialog(this);
+			if (retrurnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				saveFile(file.getAbsolutePath());
+			}
+		}
+
+	}
+
+	public void saveFile(String path) {
+		try {
+			this.qlnv.setTenFile(path);
+			FileOutputStream fos = new FileOutputStream(path);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			for (Nhanvien nv : this.qlnv.getDanhsach()) {
+				oos.writeObject(nv);
+			}
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	public void hienHienOpenFile() {
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			openFile(file);
+			thucHienHuyTim();
+		}
+	}
+
+	public void openFile(File file) {
+		ArrayList<Nhanvien> ds = new ArrayList();
+		try {
+			this.qlnv.setTenFile(file.getAbsolutePath());
+			FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Nhanvien nv = null;
+			while ((nv = (Nhanvien) ois.readObject()) != null) {
+				ds.add(nv);
+			}
+			ois.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		this.qlnv.setDanhsach(ds);
+		;
+
+	}
+
+	public void thucHienSapXep() {
+		qlnv.sapxepTang();
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		model_table.setRowCount(0); // Xóa dữ liệu cũ
+		for (Nhanvien nv : this.qlnv.getDanhsach()) {
 			this.themNhanVien(nv);
 		}
-}
-
-
-
-public void hienThiAbout() {
-	JOptionPane.showConfirmDialog(this, "Phần mềm quản lí nhân viên.");
-	
-}
-
-
-
-public void thoatKhoiChuongTrinh() {
-	int luaChon = JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn thoát khỏi chương trình không?","Exit",JOptionPane.YES_NO_OPTION);
-	if(luaChon == JOptionPane.YES_NO_OPTION) {
-		System.exit(0);
+		
 	}
-	
-}
-
-
-
-public void thucHienSaveFile() {
-	if(this.qlnv.getTenFile().length()>0) {
-		saveFile(this.qlnv.getTenFile());
-		System.out.println("đã đi vào đây tenFile");
-	}else {
-		System.out.println("đã đi vào đây tenFile duoi");
-		JFileChooser fc = new JFileChooser();
-		int retrurnVal = fc.showSaveDialog(this);
-		if(retrurnVal == JFileChooser.APPROVE_OPTION) {
-			File file = fc.getSelectedFile();
-			saveFile(file.getAbsolutePath());
-		}
-	}
-	
-}
-
-
-
-public void saveFile(String path) {
-	try {
-		this.qlnv.setTenFile(path);
-		FileOutputStream fos = new FileOutputStream(path);
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		for (Nhanvien nv : this.qlnv.getDanhsach()) {
-			oos.writeObject(nv);
-		}
-		oos.close();
-	} catch (Exception e) {
-		e.printStackTrace();
-		 JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-	}
-	
-}
-
-
-
-public void hienHienOpenFile() {
-	JFileChooser fc = new JFileChooser();
-	int returnVal = fc.showOpenDialog(this);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-		File file = fc.getSelectedFile();
-		openFile(file);
-		thucHienHuyTim();
-	} 
-}
-
-
-
-
-
-
-
-public void openFile(File file) {
-	ArrayList<Nhanvien> ds = new ArrayList();
-	try {
-		this.qlnv.setTenFile(file.getAbsolutePath());
-		FileInputStream fis = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		Nhanvien nv = null;
-		while((nv = (Nhanvien) ois.readObject())!=null) {
-			ds.add(nv);
-		}
-		ois.close();
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
-	}
-	this.qlnv.setDanhsach(ds);;
-	
-}
 }

@@ -67,7 +67,7 @@ public class QLNVControler implements ActionListener {
 				e1.printStackTrace();
 			}
 			this.gd.xoaForm();
-//			this.gd.qlnv.setLuachon("Thêm");
+
 		} else if (lay_du_lieu.equalsIgnoreCase("Cập nhật")) {
 			this.gd.hienThiThongTinNhanVien();
 
@@ -79,12 +79,15 @@ public class QLNVControler implements ActionListener {
 			this.gd.thucHienHuyTim();
 		} else if (lay_du_lieu.equalsIgnoreCase("exit")) {
 			this.gd.thoatKhoiChuongTrinh();
-		}else if (lay_du_lieu.equalsIgnoreCase("about me")) {
+		} else if (lay_du_lieu.equalsIgnoreCase("about me")) {
 			this.gd.hienThiAbout();
-		}else if (lay_du_lieu.equalsIgnoreCase("Lưu")) {
+		} else if (lay_du_lieu.equalsIgnoreCase("Lưu")) {
 			this.gd.thucHienSaveFile();
-		}else if (lay_du_lieu.equalsIgnoreCase("open")) {
+		} else if (lay_du_lieu.equalsIgnoreCase("open")) {
 			this.gd.hienHienOpenFile();
+		}else if(lay_du_lieu.equalsIgnoreCase("Sắp xếp")) {
+			this.gd.thucHienSapXep();
+//			JOptionPane.showMessageDialog(gd,"Bạn vừa ấn vô nút "+ lay_du_lieu);
 		}
 
 	}
