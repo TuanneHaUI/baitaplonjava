@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Nhanvien {
+public class Nhanvien implements Serializable{
 @Override
 	public int hashCode() {
 		return Objects.hash(ChucVu, Email, HovaTen, Luong, MaNhanVien, QueQuan, SoDienThoai, gioiTinh);
@@ -39,6 +40,12 @@ public Nhanvien(String hovaTen, Boolean gioiTinh, Chucvu ChucVu, int sodienthoai
 	this.QueQuan = queQuan;
 	this.MaNhanVien = MaNhanVien;
 	this.Luong=Luong;
+}
+@Override
+public String toString() {
+	return "Nhanvien [MaNhanVien=" + MaNhanVien + ", HovaTen=" + HovaTen + ", Email=" + Email + ", ChucVu=" + ChucVu
+			+ ", SoDienThoai=" + SoDienThoai + ", QueQuan=" + QueQuan + ", gioiTinh=" + gioiTinh + ", Luong=" + Luong
+			+ "]";
 }
 public String getMaNhanVien() {
 	return MaNhanVien;

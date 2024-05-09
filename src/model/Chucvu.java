@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Chucvu {
+public class Chucvu implements Serializable{
 private String tenChucVu;
 
 public Chucvu() {
