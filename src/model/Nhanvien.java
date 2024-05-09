@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Nhanvien {
+public class Nhanvien implements Serializable{
 @Override
 	public int hashCode() {
 		return Objects.hash(ChucVu, Email, HovaTen, Luong, MaNhanVien, QueQuan, SoDienThoai, gioiTinh);

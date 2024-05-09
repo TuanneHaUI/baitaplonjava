@@ -17,6 +17,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +33,10 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +70,7 @@ public class Giaodien extends JFrame {
 	public JRadioButton Radio_Nu;
 	private JButton Button_huyTim;
 	private JButton Button_Tim;
+	public JComboBox comboBox_Sap_Xep;
 
 	public Giaodien() {
 		this.qlnv = new QLNV();
@@ -80,24 +90,26 @@ public class Giaodien extends JFrame {
 		menuBar.setBounds(0, 0, 800, 24);
 		contentPane.add(menuBar);
 
-		JMenu mnNewMenu = new JMenu("File");
-		menuBar.add(mnNewMenu);
+		JMenu mnNewMenu_File = new JMenu("File");
+		menuBar.add(mnNewMenu_File);
 
-		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
-		mnNewMenu.add(mntmNewMenuItem);
+		JMenuItem mntmNewMenuItem_Open = new JMenuItem("Open");
+		mntmNewMenuItem_Open.addActionListener(ac);
+		mnNewMenu_File.add(mntmNewMenuItem_Open);
 
 //		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save");
 //		mnNewMenu.add(mntmNewMenuItem_1);
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Exit");
 		mntmNewMenuItem_2.addActionListener(ac);
-		mnNewMenu.add(mntmNewMenuItem_2);
+		mnNewMenu_File.add(mntmNewMenuItem_2);
 
 		JMenu mnNewMenu_1 = new JMenu("About");
 		menuBar.add(mnNewMenu_1);
 
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("About me");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
+		JMenuItem mntmNewMenuItem_About_Me = new JMenuItem("About me");
+		mntmNewMenuItem_About_Me.addActionListener(ac);
+		mnNewMenu_1.add(mntmNewMenuItem_About_Me);
 
 		JLabel Label_Que_Quan = new JLabel("Quê quán");
 		Label_Que_Quan.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -291,8 +303,16 @@ public class Giaodien extends JFrame {
 		textField_Email.setColumns(10);
 		textField_Email.setBounds(460, 437, 96, 19);
 		contentPane.add(textField_Email);
+		
+//	    comboBox_Sap_Xep = new JComboBox();
+//		comboBox_Sap_Xep.setModel(new DefaultComboBoxModel(new String[] {"","Tăng dần", "Giảm dần"}));
+//		comboBox_Sap_Xep.addActionListener(ac);
+//		comboBox_Sap_Xep.setBounds(629, 471, 83, 39);
+//		contentPane.add(comboBox_Sap_Xep);
 
 	}
+
+
 
 	public void xoaForm() {
 		textField_Ho_va_ten.setText("");
@@ -426,13 +446,11 @@ public class Giaodien extends JFrame {
 			}
 		}
 		for (Integer idCanXoa : idNhanVienCanXoa) {
-			System.out.println(idCanXoa);
 			tongSoDongTrongTable = model_table.getRowCount();
 			for (int i = 0; i < tongSoDongTrongTable; i++) {
 				String idTrongTable = model_table.getValueAt(i, 0) + "";
 				System.out.println("idTrongTable: " + idTrongTable);
 				if (idTrongTable.equals(idCanXoa.toString())) {
-					System.out.println("Đã xóa: " + i);
 					try {
 						model_table.removeRow(i);
 					} catch (Exception e) {
@@ -462,4 +480,101 @@ public class Giaodien extends JFrame {
 		}
 
 	}
+public void xoaHetDuLieuTrongBang() {
+	qlnv.sapxepGiam();
+	 DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+	    model_table.setRowCount(0); // Xóa dữ liệu cũ
+	    for (Nhanvien nv : this.qlnv.getDanhsach()) {
+			this.themNhanVien(nv);
+		}
+}
+
+
+
+public void hienThiAbout() {
+	JOptionPane.showConfirmDialog(this, "Phần mềm quản lí nhân viên.");
+	
+}
+
+
+
+public void thoatKhoiChuongTrinh() {
+	int luaChon = JOptionPane.showConfirmDialog(this,"Bạn có chắc chắn muốn thoát khỏi chương trình không?","Exit",JOptionPane.YES_NO_OPTION);
+	if(luaChon == JOptionPane.YES_NO_OPTION) {
+		System.exit(0);
+	}
+	
+}
+
+
+
+public void thucHienSaveFile() {
+	if(this.qlnv.getTenFile().length()>0) {
+		saveFile(this.qlnv.getTenFile());
+		System.out.println("đã đi vào đây tenFile");
+	}else {
+		System.out.println("đã đi vào đây tenFile duoi");
+		JFileChooser fc = new JFileChooser();
+		int retrurnVal = fc.showSaveDialog(this);
+		if(retrurnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			saveFile(file.getAbsolutePath());
+		}
+	}
+	
+}
+
+
+
+public void saveFile(String path) {
+	try {
+		this.qlnv.setTenFile(path);
+		FileOutputStream fos = new FileOutputStream(path);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		for (Nhanvien nv : this.qlnv.getDanhsach()) {
+			oos.writeObject(nv);
+		}
+		oos.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+		 JOptionPane.showMessageDialog(this, "Lỗi khi lưu file!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+	}
+	
+}
+
+
+
+public void hienHienOpenFile() {
+	JFileChooser fc = new JFileChooser();
+	int returnVal = fc.showOpenDialog(this);
+	if (returnVal == JFileChooser.APPROVE_OPTION) {
+		File file = fc.getSelectedFile();
+		openFile(file);
+		thucHienHuyTim();
+	} 
+}
+
+
+
+
+
+
+
+public void openFile(File file) {
+	ArrayList<Nhanvien> ds = new ArrayList();
+	try {
+		this.qlnv.setTenFile(file.getAbsolutePath());
+		FileInputStream fis = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Nhanvien nv = null;
+		while((nv = (Nhanvien) ois.readObject())!=null) {
+			ds.add(nv);
+		}
+		ois.close();
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+	}
+	this.qlnv.setDanhsach(ds);;
+	
+}
 }
