@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -35,18 +38,6 @@ public class Login extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -102,33 +93,123 @@ public class Login extends JFrame {
 		contentPane.add(btnNewButton_DangKi);
 	}
 
+//	public void thucHienDangNhap() {
+//		String tenTaiKhoan = textField_TaiKhoan.getText();
+//		String matKhau = passwordField_MatKhau.getText();
+//		
+//		if (tenTaiKhoan.equals("") || matKhau.equals("")) {
+//			JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
+//					JOptionPane.INFORMATION_MESSAGE);
+//		} else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
+//			JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
+//					JOptionPane.INFORMATION_MESSAGE);
+//			dispose(); // đóng của sổ login
+//			EventQueue.invokeLater(new Runnable() {
+//				public void run() {
+//					try {
+//						Giaodien frame = new Giaodien();
+//						frame.setVisible(true);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			});
+//		}
+//		 boolean loginSuccessful = checkCredentials(tenTaiKhoan, matKhau);
+//		 if(loginSuccessful) {
+//			 JOptionPane.showMessageDialog(this, "Đăng nhập thành công.", "Đăng nhập",
+//	                    JOptionPane.INFORMATION_MESSAGE);
+//	            dispose(); // Đóng cửa sổ đăng nhập
+//	            EventQueue.invokeLater(new Runnable() {
+//	                public void run() {
+//	                    try {
+//	                        Giaodien frame = new Giaodien();
+//	                        frame.setVisible(true);
+//	                    } catch (Exception e) {
+//	                        e.printStackTrace();
+//	                    }
+//	                }
+//	            });
+//		 }else {
+//				JOptionPane.showMessageDialog(this, "Nhập sai tài khoản hay mật khẩu", "Title Example",
+//						JOptionPane.INFORMATION_MESSAGE);
+//				textField_TaiKhoan.setText("");
+//				passwordField_MatKhau.setText("");
+//			}
+//
+//	}
 	public void thucHienDangNhap() {
-		String tenTaiKhoan = textField_TaiKhoan.getText();
-		String matKhau = passwordField_MatKhau.getText();
-		
-		if (tenTaiKhoan.equals("") || matKhau.equals("")) {
-			JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
-					JOptionPane.INFORMATION_MESSAGE);
-		} else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
-			JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
-					JOptionPane.INFORMATION_MESSAGE);
-			dispose(); // đóng của sổ login
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Giaodien frame = new Giaodien();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		} else {
-			JOptionPane.showMessageDialog(this, "Nhập sai tài khoản hay mật khẩu", "Title Example",
-					JOptionPane.INFORMATION_MESSAGE);
-			textField_TaiKhoan.setText("");
-			passwordField_MatKhau.setText("");
-		}
+	    String tenTaiKhoan = textField_TaiKhoan.getText();
+	    String matKhau = passwordField_MatKhau.getText();
 
+	    if (tenTaiKhoan.equals("") || matKhau.equals("")) {
+	        JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
+	                JOptionPane.INFORMATION_MESSAGE);
+	    } else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
+	        JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
+	                JOptionPane.INFORMATION_MESSAGE);
+	        dispose(); // Đóng cửa sổ đăng nhập
+	        EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+	                try {
+	                    Giaodien frame = new Giaodien();
+	                    frame.setVisible(true);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        });
+	    } else {
+	        boolean loginSuccessful = checkCredentials(tenTaiKhoan, matKhau);
+	        if (loginSuccessful) {
+	            JOptionPane.showMessageDialog(this, "Đăng nhập thành công.", "Đăng nhập",
+	                    JOptionPane.INFORMATION_MESSAGE);
+	            dispose(); // Đóng cửa sổ đăng nhập
+	            EventQueue.invokeLater(new Runnable() {
+	                public void run() {
+	                    try {
+	                        Giaodien frame = new Giaodien();
+	                        frame.setVisible(true);
+	                    } catch (Exception e) {
+	                        e.printStackTrace();
+	                    }
+	                }
+	            });
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Nhập sai tài khoản hay mật khẩu", "Title Example",
+	                    JOptionPane.INFORMATION_MESSAGE);
+	            textField_TaiKhoan.setText("");
+	            passwordField_MatKhau.setText("");
+	        }
+	    }
 	}
+
+	private boolean checkCredentials(String username, String password) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("D:\\hihi.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(": ");
+                if (parts.length >= 2) {
+                    String storedUsername = parts[1].trim();
+                    if (storedUsername.equals(username)) {
+                        // Đọc mật khẩu và so sánh
+                        line = reader.readLine();
+                        parts = line.split(": ");
+                        if (parts.length >= 2) {
+                            String storedPassword = parts[1].trim();
+                            if (storedPassword.equals(password)) {
+                                reader.close();
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
