@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
@@ -34,6 +36,7 @@ public class Login extends JFrame {
 	private JButton btnNewButton_DangNhap;
 	private JButton btnNewButton_DangKi;
 	private Component frame;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -46,7 +49,7 @@ public class Login extends JFrame {
 		LoginControler ac = new LoginControler(this);
 		setResizable(false);// cố định cửa số không cho phóng to
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 542, 343);
+		setBounds(100, 100, 870, 347);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,40 +60,56 @@ public class Login extends JFrame {
 		lblNewLabel_Login = new JLabel("From Login");
 		lblNewLabel_Login.setForeground(Color.CYAN);
 		lblNewLabel_Login.setBackground(Color.WHITE);
-		lblNewLabel_Login.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_Login.setBounds(201, 38, 136, 25);
+		lblNewLabel_Login.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblNewLabel_Login.setBounds(628, 31, 136, 46);
 		contentPane.add(lblNewLabel_Login);
 
 		lblNewLabel_TaiKhoan = new JLabel("Username");
+		lblNewLabel_TaiKhoan.setToolTipText("");
 		lblNewLabel_TaiKhoan.setFont(new Font("SimSun", Font.PLAIN, 20));
-		lblNewLabel_TaiKhoan.setBounds(74, 88, 99, 25);
+		lblNewLabel_TaiKhoan.setBounds(479, 90, 99, 25);
 		contentPane.add(lblNewLabel_TaiKhoan);
 
 		lblNewLabel_MatKhau = new JLabel("Password");
 		lblNewLabel_MatKhau.setFont(new Font("SimSun", Font.PLAIN, 20));
-		lblNewLabel_MatKhau.setBounds(74, 156, 99, 25);
+		lblNewLabel_MatKhau.setBounds(479, 158, 99, 25);
 		contentPane.add(lblNewLabel_MatKhau);
 
 		textField_TaiKhoan = new JTextField();
-		textField_TaiKhoan.setBounds(212, 85, 177, 36);
+		textField_TaiKhoan.setBounds(617, 87, 177, 36);
 		contentPane.add(textField_TaiKhoan);
 		textField_TaiKhoan.setColumns(10);
 
 		passwordField_MatKhau = new JPasswordField();
-		passwordField_MatKhau.setBounds(212, 153, 177, 36);
+		passwordField_MatKhau.setBounds(617, 155, 177, 36);
 		contentPane.add(passwordField_MatKhau);
 
 		btnNewButton_DangNhap = new JButton("Đăng nhập");
 		btnNewButton_DangNhap.addActionListener(ac);
 		btnNewButton_DangNhap.setBackground(Color.WHITE);
-		btnNewButton_DangNhap.setBounds(74, 220, 85, 36);
+		btnNewButton_DangNhap.setBounds(558, 222, 85, 36);
 		contentPane.add(btnNewButton_DangNhap);
 
 		btnNewButton_DangKi = new JButton("Đăng kí");
 		btnNewButton_DangKi.addActionListener(ac);
 		btnNewButton_DangKi.setBackground(Color.WHITE);
-		btnNewButton_DangKi.setBounds(324, 220, 85, 36);
+		btnNewButton_DangKi.setBounds(729, 222, 85, 36);
 		contentPane.add(btnNewButton_DangKi);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(0, 0, 455, 310);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		 lblNewLabel = new JLabel("New label");
+		//lblNewLabel.setIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\ảnh đẹp login.png"));
+		ImageIcon icon = new ImageIcon("C:\\Users\\admin\\Downloads\\ảnh đẹp login.png");
+		Image image = icon.getImage().getScaledInstance(455, 310, Image.SCALE_SMOOTH);
+		lblNewLabel.setIcon(new ImageIcon(image));
+
+		lblNewLabel.setBounds(0, 0, 455, 310);
+		panel.add(lblNewLabel);
 	}
 
 //	public void thucHienDangNhap() {
