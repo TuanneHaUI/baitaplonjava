@@ -16,6 +16,7 @@ import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -104,7 +105,8 @@ public class Login extends JFrame {
 		
 		 lblNewLabel = new JLabel("New label");
 		//lblNewLabel.setIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\ảnh đẹp login.png"));
-		ImageIcon icon = new ImageIcon("C:\\Users\\admin\\Downloads\\ảnh đẹp login.png");
+		 URL link = Dangkitaikhoan.class.getResource("ảnh đẹp login.png");
+		ImageIcon icon = new ImageIcon(link);
 		Image image = icon.getImage().getScaledInstance(455, 310, Image.SCALE_SMOOTH);
 		lblNewLabel.setIcon(new ImageIcon(image));
 
