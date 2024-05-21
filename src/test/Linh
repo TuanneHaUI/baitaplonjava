@@ -1,0 +1,29 @@
+package thanhMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractButton;
+public class controller implements ActionListener{
+	view v;
+	public controller(view v) {
+		this.v=v;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String s=e.getActionCommand();
+		if(s.equals("show")) {
+			AbstractButton a=(AbstractButton) e.getSource();
+			Boolean b=a.getModel().isSelected();
+			if(b) {
+				this.v.hien();
+			}
+			else {
+				this.v.an();
+			}
+		}
+	}
+public static void main(String[] args) {
+		new view();
+	}
+}
