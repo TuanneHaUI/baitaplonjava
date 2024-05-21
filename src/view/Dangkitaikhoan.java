@@ -53,6 +53,8 @@ public class Dangkitaikhoan extends JFrame {
 	 * Create the frame.
 	 */
 	public Dangkitaikhoan() {
+		this.setTitle("Đăng kí");
+		setResizable(false);// cố định cửa số không cho phóng to
 		LoginControler ac = new LoginControler(this);
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,7 +120,7 @@ public class Dangkitaikhoan extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 //		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\ảnh đăng kí.jpg"));
-		URL link = Dangkitaikhoan.class.getResource("ảnh đăng kí.jpg");
+		URL link = Dangkitaikhoan.class.getResource("anhdk.jpg");
 		ImageIcon icon = new ImageIcon(link);
 		Image image = icon.getImage().getScaledInstance(467, 476, Image.SCALE_SMOOTH);
 		lblNewLabel.setIcon(new ImageIcon(image));
@@ -126,21 +128,28 @@ public class Dangkitaikhoan extends JFrame {
 		panel.add(lblNewLabel);
 	}
 	public boolean thucHienDangKi() {
-		boolean ktra = false;
-		String username = textField_TaiKhoan.getText();
-        String email = textField_Email.getText();
-        String password = new String(passwordField_MatKhau.getPassword());
-        String confirmPassword = new String(passwordField_MatKhau1.getPassword());
-        if(password.equals(confirmPassword)) {
-        	luuFlieTaiKhoan.writeToFile(username, email, confirmPassword);
-        	JOptionPane.showMessageDialog(this, "Đăng kí thành công","Đăng kí",
-					JOptionPane.INFORMATION_MESSAGE);
-        	ktra = true;
-        }else {
-        	JOptionPane.showMessageDialog(this, "Không đăng kí được","Đăng kí",
-					JOptionPane.INFORMATION_MESSAGE);
-        }
-        return ktra;
+	    boolean ktra = false;
+	    String username = textField_TaiKhoan.getText().trim();
+	    String email = textField_Email.getText().trim();
+	    String password = new String(passwordField_MatKhau.getPassword()).trim();
+	    String confirmPassword = new String(passwordField_MatKhau1.getPassword()).trim();
+
+	    if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Không đăng kí được. Các trường không được để trống.", "Đăng kí", JOptionPane.INFORMATION_MESSAGE);
+	    } else if (!password.equals(confirmPassword)) {
+	        JOptionPane.showMessageDialog(this, "Mật khẩu không khớp.", "Đăng kí", JOptionPane.INFORMATION_MESSAGE);
+	        textField_TaiKhoan.setText("");
+	        textField_Email.setText("");
+	        passwordField_MatKhau.setText("");
+	        passwordField_MatKhau1.setText("");
+	    } else {
+	        luuFlieTaiKhoan.writeToFile(username, email, confirmPassword);
+	        JOptionPane.showMessageDialog(this, "Đăng kí thành công", "Đăng kí", JOptionPane.INFORMATION_MESSAGE);
+	        ktra = true;
+	    }
+
+	    return ktra;
 	}
+
 	
 }

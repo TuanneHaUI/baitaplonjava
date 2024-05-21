@@ -48,6 +48,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		LoginControler ac = new LoginControler(this);
+		this.setTitle("Đăng nhập");
 		setResizable(false);// cố định cửa số không cho phóng to
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 347);
@@ -114,51 +115,7 @@ public class Login extends JFrame {
 		panel.add(lblNewLabel);
 	}
 
-//	public void thucHienDangNhap() {
-//		String tenTaiKhoan = textField_TaiKhoan.getText();
-//		String matKhau = passwordField_MatKhau.getText();
-//		
-//		if (tenTaiKhoan.equals("") || matKhau.equals("")) {
-//			JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản hay mật khẩu", "Title Example",
-//					JOptionPane.INFORMATION_MESSAGE);
-//		} else if (tenTaiKhoan.equals("Lophocjava") || matKhau.equals("Lophocjava")) {
-//			JOptionPane.showMessageDialog(this, "Đăng nhập thành công.","Đăng nhập",
-//					JOptionPane.INFORMATION_MESSAGE);
-//			dispose(); // đóng của sổ login
-//			EventQueue.invokeLater(new Runnable() {
-//				public void run() {
-//					try {
-//						Giaodien frame = new Giaodien();
-//						frame.setVisible(true);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			});
-//		}
-//		 boolean loginSuccessful = checkCredentials(tenTaiKhoan, matKhau);
-//		 if(loginSuccessful) {
-//			 JOptionPane.showMessageDialog(this, "Đăng nhập thành công.", "Đăng nhập",
-//	                    JOptionPane.INFORMATION_MESSAGE);
-//	            dispose(); // Đóng cửa sổ đăng nhập
-//	            EventQueue.invokeLater(new Runnable() {
-//	                public void run() {
-//	                    try {
-//	                        Giaodien frame = new Giaodien();
-//	                        frame.setVisible(true);
-//	                    } catch (Exception e) {
-//	                        e.printStackTrace();
-//	                    }
-//	                }
-//	            });
-//		 }else {
-//				JOptionPane.showMessageDialog(this, "Nhập sai tài khoản hay mật khẩu", "Title Example",
-//						JOptionPane.INFORMATION_MESSAGE);
-//				textField_TaiKhoan.setText("");
-//				passwordField_MatKhau.setText("");
-//			}
-//
-//	}
+
 	public void thucHienDangNhap() {
 	    String tenTaiKhoan = textField_TaiKhoan.getText();
 	    String matKhau = passwordField_MatKhau.getText();
@@ -173,8 +130,8 @@ public class Login extends JFrame {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	                try {
-	                    Giaodien frame = new Giaodien();
-	                    frame.setVisible(true);
+	                	 SlidingMenuDemo frame = new SlidingMenuDemo();
+	                     frame.setVisible(true);
 	                } catch (Exception e) {
 	                    e.printStackTrace();
 	                }
@@ -189,8 +146,8 @@ public class Login extends JFrame {
 	            EventQueue.invokeLater(new Runnable() {
 	                public void run() {
 	                    try {
-	                        Giaodien frame = new Giaodien();
-	                        frame.setVisible(true);
+	                    	 SlidingMenuDemo frame = new SlidingMenuDemo();
+	                         frame.setVisible(true);
 	                    } catch (Exception e) {
 	                        e.printStackTrace();
 	                    }
