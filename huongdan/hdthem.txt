@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hướng dẫn thêm nhân viên mới</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+        h1 {
+            color: #2E8B57;
+        }
+        p, ul, ol {
+            line-height: 1.6;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng dẫn thêm nhân viên mới</h1>
+    <ol>
+        <li>Nhập tất cả thông tin của nhân viên ở phần thông tin nhân viên ở phía dưới phần mềm
+            <ul>
+                <li>Mã nhân viên: Nhập mã số cho nhân viên mới</li>
+                <li>Họ và tên: Nhập họ và tên đầy đủ của nhân viên mới</li>
+                <li>Giới tính: Chọn giới tính của nhân viên mới</li>
+                <li>Lương: Nhập lương một tháng đi làm đầy đủ của nhân viên mới</li>
+                <li>Chức vụ: Chọn chức vụ phù hợp với nhân viên mới</li>
+                <li>Số điện thoại: Nhập số điện thoại của nhân viên mới</li>
+                <li>Quê quán: Chọn quê quán của nhân viên mới</li>
+                <li>Email: Chỉ cần nhập phần địa chỉ email ở trước dấu @, phần mềm sẽ tự thêm đuôi vào sau.</li>
+            </ul>
+        </li>
+        <li>Ấn vào nút thêm ở hàng cuối cùng của phần mềm để thêm nhân viên mới, thông tin nhân viên mới sẽ hiện ở bảng danh sách nhân viên bên trên phần thông tin nhân viên.</li>
+    </ol>
+</body>
+</html>

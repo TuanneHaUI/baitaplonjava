@@ -53,8 +53,8 @@ public class SlidingMenuDemo extends JFrame {
         employeeManagementButton.addActionListener(ac);
         JButton accountManagementButton = new JButton("Quản lí tài khoản");
         accountManagementButton.addActionListener(ac);
-        JButton aboutButton = new JButton("Giới thiệu");
-        aboutButton.addActionListener(ac);
+        JButton guideButton = new JButton("Hướng dẫn");
+        guideButton.addActionListener(ac);
         JButton logoutButton = new JButton("Đăng xuất");
         logoutButton.addActionListener(ac);
         JButton editButton = new JButton("Chỉnh sửa");
@@ -64,7 +64,7 @@ public class SlidingMenuDemo extends JFrame {
         addMenuButton(homeButton);
         addMenuButton(employeeManagementButton);
         addMenuButton(accountManagementButton);
-        addMenuButton(aboutButton);
+        addMenuButton(guideButton);
         addMenuButton(logoutButton);
         addMenuButton(editButton);
 

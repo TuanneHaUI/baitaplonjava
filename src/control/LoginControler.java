@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import view.Chinhsuataikhoan;
 import view.Dangkitaikhoan;
 import view.Giaodien;
+import view.Huongdan;
 import view.Login;
 import view.Quanlitaikhoan;
 import view.SlidingMenuDemo;
@@ -17,6 +19,11 @@ public class LoginControler implements ActionListener {
     private Dangkitaikhoan dk;
     private SlidingMenuDemo sd;
     private Quanlitaikhoan ql;
+    private Chinhsuataikhoan cs;
+    public LoginControler(Chinhsuataikhoan cs) {
+		super();
+		this.cs = cs;
+	}
     public LoginControler(Quanlitaikhoan ql) {
 		super();
 		this.ql = ql;
@@ -80,6 +87,17 @@ public class LoginControler implements ActionListener {
                     }
                 }
             });
+        }else if(laydulieu.equalsIgnoreCase("Hướng dẫn")) {
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                    	Huongdan.hienhuongdan();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                });
+           
         }else if(laydulieu.equalsIgnoreCase("Đăng xuất")) {
         	int luaChon = JOptionPane.showConfirmDialog(sd, "Bạn có chắc chắn muốn đăng xuất chương trình không?",
     				"Đăng xuất", JOptionPane.YES_NO_OPTION);
@@ -109,7 +127,7 @@ public class LoginControler implements ActionListener {
                      }
                  }
              });
-        }else if(laydulieu.equalsIgnoreCase("Quay lại")) {
+        }else if(laydulieu.equalsIgnoreCase("Quay lại")&&ql != null) {
         	ql.dispose();// đóng cửa sổ hiện tại
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -121,6 +139,34 @@ public class LoginControler implements ActionListener {
                     }
                 }
             });
+        }else if(laydulieu.equalsIgnoreCase("Chỉnh sửa")) {
+        	sd.dispose();// đóng cửa sổ hiện tại
+        	EventQueue.invokeLater(new Runnable() {
+    			public void run() {
+    				try {
+    					Chinhsuataikhoan frame = new Chinhsuataikhoan();
+    					frame.setVisible(true);
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
+    			}
+    		});
+        }else if(laydulieu.equalsIgnoreCase("Quay lại")) {
+        	cs.dispose();
+        	 EventQueue.invokeLater(new Runnable() {
+                 public void run() {
+                     try {
+                         SlidingMenuDemo frame = new SlidingMenuDemo();
+                         frame.setVisible(true);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                 }
+             });
+        } else if(laydulieu.equalsIgnoreCase("Sửa")) {
+        	cs.sua();
+        }else if(laydulieu.equalsIgnoreCase("xóa")) {
+        	cs.xoa();
         }
     }
 }

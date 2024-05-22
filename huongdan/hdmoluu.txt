@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hướng dẫn cập nhật mở và lưu danh sách nhân viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+        h1 {
+            color: #2E8B57;
+        }
+        p, ul, ol {
+            line-height: 1.6;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng dẫn cập nhật mở và lưu danh sách nhân viên</h1>
+    <ol>
+        <li>Trong trường hợp cần lưu danh sách nhân viên hiện tại:</li>
+        <ul>
+            <li>Bấm vào nút "Lưu" ở hàng cuối cùng của phần mềm.</li>
+            <li>Cửa sổ thư mục hiện ra, chọn vị trí lưu file chứa danh sách nhân viên.</li>
+            <li>Đặt tên cho file lưu file chứa danh sách nhân viên và ấn "Save" để hoàn tất lưu danh sách nhân viên.</li>
+        </ul>
+        <li>Trong hợp cần mở danh sách nhân viên đã lưu trước đó:</li>
+        <ul>
+            <li>Chọn "File" ở thanh menu ở đỉnh của phần mềm, tiếp đó chọn "Open".</li>
+            <li>Cửa sổ thư mục hiện ra, tìm đến vị trí đã lưu file chứa danh sách nhân viên trước đó.</li>
+            <li>Bấm vào "Open" để mở file chứa danh sách nhân viên, danh sách nhân viên trong file sẽ được hiện ra ở bảng danh sách nhân viên trong phần mềm.</li>
+        </ul>
+    </ol>
+</body>
+</html>
