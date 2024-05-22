@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import view.Chinhsuataikhoan;
 import view.Dangkitaikhoan;
 import view.Giaodien;
 import view.Huongdan;
@@ -19,11 +18,6 @@ public class LoginControler implements ActionListener {
     private Dangkitaikhoan dk;
     private SlidingMenuDemo sd;
     private Quanlitaikhoan ql;
-    private Chinhsuataikhoan cs;
-    public LoginControler(Chinhsuataikhoan cs) {
-		super();
-		this.cs = cs;
-	}
     public LoginControler(Quanlitaikhoan ql) {
 		super();
 		this.ql = ql;
@@ -127,7 +121,7 @@ public class LoginControler implements ActionListener {
                      }
                  }
              });
-        }else if(laydulieu.equalsIgnoreCase("Quay lại")&&ql != null) {
+        }else if(laydulieu.equalsIgnoreCase("Quay lại")) {
         	ql.dispose();// đóng cửa sổ hiện tại
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -139,34 +133,6 @@ public class LoginControler implements ActionListener {
                     }
                 }
             });
-        }else if(laydulieu.equalsIgnoreCase("Chỉnh sửa")) {
-        	sd.dispose();// đóng cửa sổ hiện tại
-        	EventQueue.invokeLater(new Runnable() {
-    			public void run() {
-    				try {
-    					Chinhsuataikhoan frame = new Chinhsuataikhoan();
-    					frame.setVisible(true);
-    				} catch (Exception e) {
-    					e.printStackTrace();
-    				}
-    			}
-    		});
-        }else if(laydulieu.equalsIgnoreCase("Quay lại")) {
-        	cs.dispose();
-        	 EventQueue.invokeLater(new Runnable() {
-                 public void run() {
-                     try {
-                         SlidingMenuDemo frame = new SlidingMenuDemo();
-                         frame.setVisible(true);
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                 }
-             });
-        } else if(laydulieu.equalsIgnoreCase("Sửa")) {
-        	cs.sua();
-        }else if(laydulieu.equalsIgnoreCase("xóa")) {
-        	cs.xoa();
         }
     }
 }
