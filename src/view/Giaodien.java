@@ -42,6 +42,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import control.QLNVControler;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class Giaodien extends JFrame {
 
@@ -73,14 +75,16 @@ public class Giaodien extends JFrame {
 	public JComboBox comboBox_Sap_Xep;
 
 	public Giaodien() {
+		this.setTitle("Quản lí nhân viên");
 		this.qlnv = new QLNV();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 758, 583);
-
+		setResizable(false);// cố định cửa số không cho phóng to
 		// tao lệnh điều khiển
 		ac = new QLNVControler(this);
 
 		contentPane = new JPanel();
+		contentPane.setForeground(new Color(255, 128, 64));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -303,6 +307,12 @@ public class Giaodien extends JFrame {
 		textField_Email.setColumns(10);
 		textField_Email.setBounds(460, 437, 96, 19);
 		contentPane.add(textField_Email);
+		
+		JButton Button_Quay_Lai = new JButton("Quay lại");
+		Button_Quay_Lai.addActionListener(ac);
+		Button_Quay_Lai.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Button_Quay_Lai.setBounds(627, 471, 97, 39);
+		contentPane.add(Button_Quay_Lai);
 
 //	    comboBox_Sap_Xep = new JComboBox();
 //		comboBox_Sap_Xep.setModel(new DefaultComboBoxModel(new String[] {"","Tăng dần", "Giảm dần"}));

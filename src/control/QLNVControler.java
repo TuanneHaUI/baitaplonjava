@@ -1,5 +1,6 @@
 package control;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import model.Chucvu;
 import model.Tinh;
 import model.Nhanvien;
 import view.Giaodien;
+import view.SlidingMenuDemo;
 
 public class QLNVControler implements ActionListener {
 	private Giaodien gd;
@@ -88,6 +90,18 @@ public class QLNVControler implements ActionListener {
 		}else if(lay_du_lieu.equalsIgnoreCase("Sắp xếp")) {
 			this.gd.thucHienSapXep();
 //			JOptionPane.showMessageDialog(gd,"Bạn vừa ấn vô nút "+ lay_du_lieu);
+		}else if(lay_du_lieu.equalsIgnoreCase("Quay lại")) {
+			gd.dispose();// tắt cửa sổ hiện tại
+			   EventQueue.invokeLater(new Runnable() {
+		            public void run() {
+		                try {
+		                    SlidingMenuDemo frame = new SlidingMenuDemo();
+		                    frame.setVisible(true);
+		                } catch (Exception e) {
+		                    e.printStackTrace();
+		                }
+		            }
+		        });
 		}
 
 	}
