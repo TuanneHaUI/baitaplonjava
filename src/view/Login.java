@@ -86,13 +86,13 @@ public class Login extends JFrame {
 		passwordField_MatKhau.setBounds(617, 155, 177, 36);
 		contentPane.add(passwordField_MatKhau);
 
-		btnNewButton_DangNhap = new JButton("Đăng nhập");
+		btnNewButton_DangNhap = new JButton("Login");
 		btnNewButton_DangNhap.addActionListener(ac);
 		btnNewButton_DangNhap.setBackground(Color.WHITE);
 		btnNewButton_DangNhap.setBounds(558, 222, 85, 36);
 		contentPane.add(btnNewButton_DangNhap);
 
-		btnNewButton_DangKi = new JButton("Đăng kí");
+		btnNewButton_DangKi = new JButton("Register");
 		btnNewButton_DangKi.addActionListener(ac);
 		btnNewButton_DangKi.setBackground(Color.WHITE);
 		btnNewButton_DangKi.setBounds(729, 222, 85, 36);

@@ -20,4 +20,3 @@ public class Test {
 	}
 
 }
-// chạy thử xem sao
