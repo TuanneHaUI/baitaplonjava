@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import view.Chinhsuataikhoan;
 import view.Dangkitaikhoan;
 import view.Giaodien;
 import view.Huongdan;
@@ -19,11 +18,6 @@ public class LoginControler implements ActionListener {
     private Dangkitaikhoan dk;
     private SlidingMenuDemo sd;
     private Quanlitaikhoan ql;
-    private Chinhsuataikhoan cs;
-    public LoginControler(Chinhsuataikhoan cs) {
-		super();
-		this.cs = cs;
-	}
     public LoginControler(Quanlitaikhoan ql) {
 		super();
 		this.ql = ql;
@@ -49,9 +43,9 @@ public class LoginControler implements ActionListener {
 	@Override
     public void actionPerformed(ActionEvent e) {
         String laydulieu = e.getActionCommand();
-        if (laydulieu.equalsIgnoreCase("đăng nhập")) {
+        if (laydulieu.equalsIgnoreCase("Login")) {
             this.lg.thucHienDangNhap();
-        } else if (laydulieu.equalsIgnoreCase("đăng kí")) {
+        } else if (laydulieu.equalsIgnoreCase("Register")) {
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     try {
@@ -127,7 +121,7 @@ public class LoginControler implements ActionListener {
                      }
                  }
              });
-        }else if(laydulieu.equalsIgnoreCase("Quay lại")&&ql != null) {
+        }else if(laydulieu.equalsIgnoreCase("Quay lại")) {
         	ql.dispose();// đóng cửa sổ hiện tại
             EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -139,6 +133,7 @@ public class LoginControler implements ActionListener {
                     }
                 }
             });
+<<<<<<< HEAD
         }else if(laydulieu.equalsIgnoreCase("Chỉnh sửa")) {
         	sd.dispose();// đóng cửa sổ hiện tại
         	EventQueue.invokeLater(new Runnable() {
@@ -166,7 +161,13 @@ public class LoginControler implements ActionListener {
         } else if(laydulieu.equalsIgnoreCase("Sửa")) {
         	cs.sua();
         }else if(laydulieu.equalsIgnoreCase("xóa")) {
-        	cs.xoa();
+        	int luaChon = JOptionPane.showConfirmDialog(sd, "Bạn có chắc chắc muốn xóa chứ",
+    				"Quản lí tài khoản", JOptionPane.YES_NO_OPTION);
+        	if(luaChon == JOptionPane.YES_OPTION) {
+        	  	cs.xoa();
+        	}
+=======
+>>>>>>> 402506f6424ce40b1e4e8615d1041cd33b80d1ee
         }
     }
 }
